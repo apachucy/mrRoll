@@ -20,6 +20,11 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="cf9681571439d7c8941d4f5f36f2603e9681592f" />
+        <service android:name=".service.TokenInstanceService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
