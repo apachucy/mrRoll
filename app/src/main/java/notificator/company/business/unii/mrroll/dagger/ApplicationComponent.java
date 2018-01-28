@@ -6,17 +6,14 @@ import android.content.Context;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import notificator.company.business.unii.mrroll.persistance.ConfigurationManager;
 
 @Component(modules = {ApplicationModule.class})
 @Singleton
 public interface ApplicationComponent {
 
-    /**
-     * The application context
-     *
-     * @return the context.
-     */
     Context provideContext();
 
+    ConfigurationManager provideConfigurationManager();
 }
 
