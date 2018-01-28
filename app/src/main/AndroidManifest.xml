@@ -3,6 +3,7 @@
     package="notificator.company.business.unii.mrroll">
 
     <application
+        android:name=".MrRollApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
