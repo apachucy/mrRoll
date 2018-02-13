@@ -24,21 +24,39 @@ android {
     }
 }
 
+project.ext {
+    supportLibraryVersion = "26.1.0"
+    lifecycle = "1.1.0"
+    daggerVersion = "2.13"
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation "com.android.support:appcompat-v7:$project.supportLibraryVersion"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.google.firebase:firebase-messaging:11.0.4'
+
+
+    implementation "android.arch.lifecycle:extensions:$project.lifecycle"
+    annotationProcessor "android.arch.lifecycle:compiler:$project.lifecycle"
+
+    // Test helpers for LiveData
+    testImplementation "android.arch.core:core-testing:$project.lifecycle"
+
+
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    compile 'com.google.dagger:dagger:2.14.1'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.14.1'
+    annotationProcessor "com.google.dagger:dagger-compiler:$project.daggerVersion"
+    implementation "com.google.dagger:dagger:$project.daggerVersion"
 
-    compile 'com.google.dagger:dagger-android:2.14.1'
-    compile 'com.google.dagger:dagger-android-support:2.14.1' // if you use the support libraries
-    annotationProcessor 'com.google.dagger:dagger-android-processor:2.14.1'
+    // if you use the support libraries
+    annotationProcessor "com.google.dagger:dagger-android-processor:$project.daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$project.daggerVersion"
+    implementation "com.google.dagger:dagger-android:$project.daggerVersion"
+
     compile('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
         transitive = true;
     }
