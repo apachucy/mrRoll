@@ -7,7 +7,7 @@ public interface ConfigurationManager {
 
     void setCloudToken(String token);
 
-    boolean isFirstRun();
+    boolean isRequestPermissionGranted();
 
-    void setFirstRun(boolean isFirstRun);
+    void setRequestPermissionGranted(boolean requestPermissionGranted);
 }

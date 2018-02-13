@@ -4,9 +4,7 @@ package notificator.company.business.unii.mrroll.persistance;
 public class LocalConfigurationManager implements ConfigurationManager {
 
     private static final String KEY_CLOUD_TOKEN = "KEY_CLOUD_TOKEN";
-
-    private static final String KEY_FIRST_RUN = "KEY_FIRST_RUN";
-
+    private static final String NOTIFICATION_PERMISSION_GRANTED = "NOTIFICATION_PERMISSION_GRANTED";
 
     private ConfigurationService configurationService;
 
@@ -25,12 +23,14 @@ public class LocalConfigurationManager implements ConfigurationManager {
     }
 
     @Override
-    public boolean isFirstRun() {
-        return configurationService.getBoolean(KEY_FIRST_RUN, true);
+    public boolean isRequestPermissionGranted() {
+        return configurationService.getBoolean(NOTIFICATION_PERMISSION_GRANTED, false);
     }
 
     @Override
-    public void setFirstRun(boolean isFirstRun) {
-        configurationService.put(KEY_FIRST_RUN, isFirstRun);
+    public void setRequestPermissionGranted(boolean requestPermissionGranted) {
+        configurationService.put(NOTIFICATION_PERMISSION_GRANTED, requestPermissionGranted);
     }
+
+
 }
