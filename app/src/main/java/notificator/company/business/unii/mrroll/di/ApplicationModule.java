@@ -1,4 +1,4 @@
-package notificator.company.business.unii.mrroll.dagger;
+package notificator.company.business.unii.mrroll.di;
 
 import android.content.Context;
 
@@ -18,20 +18,18 @@ public class ApplicationModule implements IApplicationModule {
     /**
      * The application instance
      */
-    private final MrRollApplication application;
-    private final String CONFIG_FILE = "configuration";
 
-    public ApplicationModule(MrRollApplication application) {
-        this.application = application;
-    }
+    private final String CONFIG_FILE = "configuration";
 
     @Provides
     @Singleton
     @Override
-    public Context provideApplicationContext() {
-        return this.application;
+    public Context provideApplicationContext(MrRollApplication application) {
+        return application.getApplicationContext();
     }
 
+    @Provides
+    @Singleton
     @Override
     public ConfigurationManager provideConfigurationManager(Context context) {
         return new LocalConfigurationManager(new ConfigurationService(context, CONFIG_FILE));
