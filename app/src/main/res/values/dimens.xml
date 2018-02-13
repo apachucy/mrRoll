@@ -1,0 +1,7 @@
+<resources>
+    <dimen name="logo_dim">150dp</dimen>
+    <dimen name="padding_normal">8dp</dimen>
+    <dimen name="padding_image">16dp</dimen>
+    <dimen name="padding_text">8dp</dimen>
+    <dimen name="padding_button">8dp</dimen>
+</resources>
