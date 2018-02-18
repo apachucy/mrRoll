@@ -1,0 +1,5 @@
+<resources>
+    <string name="base_url">http://polls.apiblueprint.org/</string>
+    <string name="api_version">v1.0/</string>
+    <string name="platform">Android</string>
+</resources>
