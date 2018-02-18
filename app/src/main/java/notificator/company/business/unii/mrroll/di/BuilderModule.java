@@ -11,6 +11,6 @@ public abstract class BuilderModule {
     @ContributesAndroidInjector(modules = SplashScreenModule.class)
     abstract SplashScreenActivity bindSplashScreenActivity();
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = RegisterViewModule.class)
     abstract RegisterActivity bindRegisterActivity();
 }

@@ -3,4 +3,5 @@
     <string name="notification_terms_and_condition_disclaimer">This application only notifies about events that were configured on backend. App was created to inform persons in company about Mr Roll or other food sellers. Please be advised that we do not check what information will be send from e-mail to mobile device</string>
     <string name="terms_and_condition_check_box">I agree</string>
     <string name="terms_and_condition_button">Start</string>
+    <string name="network_error">Network Error, try later</string>
 </resources>
