@@ -5,7 +5,7 @@ public class LocalConfigurationManager implements ConfigurationManager {
 
     private static final String KEY_CLOUD_TOKEN = "KEY_CLOUD_TOKEN";
     private static final String NOTIFICATION_PERMISSION_GRANTED = "NOTIFICATION_PERMISSION_GRANTED";
-
+    private static final String USER_ID = "USER_ID";
     private ConfigurationService configurationService;
 
     public LocalConfigurationManager(ConfigurationService configurationService) {
@@ -30,6 +30,17 @@ public class LocalConfigurationManager implements ConfigurationManager {
     @Override
     public void setRequestPermissionGranted(boolean requestPermissionGranted) {
         configurationService.put(NOTIFICATION_PERMISSION_GRANTED, requestPermissionGranted);
+    }
+
+    @Override
+    public void setUserId(int userId) {
+        configurationService.put(USER_ID, userId);
+
+    }
+
+    @Override
+    public int getUserId() {
+        return configurationService.getInt(USER_ID, 0);
     }
 
 

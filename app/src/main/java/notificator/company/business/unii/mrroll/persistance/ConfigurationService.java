@@ -7,8 +7,7 @@ import android.content.SharedPreferences;
 public class ConfigurationService {
 
     private final Context context;
-
-    final SharedPreferences preferences;
+    private final SharedPreferences preferences;
 
 
     public ConfigurationService(Context context, String fileName) {
@@ -44,6 +43,12 @@ public class ConfigurationService {
         }
     }
 
+    public int getInt(String key, int defaultValue) {
+        synchronized (preferences) {
+            return preferences.getInt(key, defaultValue);
+        }
+    }
+
     public void put(final String key, final String value) {
         synchronized (preferences) {
             preferences.edit().putString(key, value).apply();
@@ -56,4 +61,9 @@ public class ConfigurationService {
         }
     }
 
+    public void put(final String key, final int value) {
+        synchronized (preferences) {
+            preferences.edit().putInt(key, value).apply();
+        }
+    }
 }

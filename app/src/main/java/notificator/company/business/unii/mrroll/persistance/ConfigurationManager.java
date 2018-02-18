@@ -10,4 +10,8 @@ public interface ConfigurationManager {
     boolean isRequestPermissionGranted();
 
     void setRequestPermissionGranted(boolean requestPermissionGranted);
+
+    void setUserId(int userId);
+
+    int getUserId();
 }
