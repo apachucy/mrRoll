@@ -12,7 +12,7 @@ import notificator.company.business.unii.mrroll.MrRollApplication;
 import notificator.company.business.unii.mrroll.persistance.ConfigurationManager;
 import notificator.company.business.unii.mrroll.service.TokenInstanceService;
 
-@Component(modules = {AndroidSupportInjectionModule.class, ApplicationModule.class, BuilderModule.class})
+@Component(modules = {AndroidSupportInjectionModule.class, ApplicationModule.class, BuilderModule.class, NetworkModule.class})
 @Singleton
 public interface ApplicationComponent {
 
@@ -24,11 +24,11 @@ public interface ApplicationComponent {
         ApplicationComponent build();
     }
 
- //   Context provideContext();
+    //   Context provideContext();
 
 //    ConfigurationManager provideConfigurationManager();
 
- //   void inject(TokenInstanceService tokenInstanceService);
+    //   void inject(TokenInstanceService tokenInstanceService);
 
     void inject(MrRollApplication app);
 }
