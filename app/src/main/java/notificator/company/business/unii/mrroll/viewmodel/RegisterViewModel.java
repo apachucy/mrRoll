@@ -91,11 +91,13 @@ public class RegisterViewModel extends BaseViewModel {
         return serverRequestStatus;
     }
 
+
     @Override
     protected void onCleared() {
-        super.onCleared();
-        if (requestLiveData.hasObservers()) {
+        if (requestLiveData != null && requestLiveData.hasObservers()) {
             requestLiveData.removeObserver(requestObserver);
         }
+        super.onCleared();
+
     }
 }
