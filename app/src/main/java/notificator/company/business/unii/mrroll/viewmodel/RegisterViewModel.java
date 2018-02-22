@@ -68,7 +68,7 @@ public class RegisterViewModel extends BaseViewModel {
 
     public void onSaveButtonPressed() {
         String token = configurationManager.getCloudToken();
-        CreateUserRequest user = new CreateUserRequest(platformName, "123fsfsgdr24325");
+        CreateUserRequest user = new CreateUserRequest(platformName, token);
         requestLiveData = accountRepository.createUser(user);
 
         if (!requestLiveData.hasActiveObservers()) {
