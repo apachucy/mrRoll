@@ -44,18 +44,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/disclaimer" />
 
-    <com.dd.CircularProgressButton
+
+    <br.com.simplepass.loading_button_lib.customViews.CircularProgressButton
         android:id="@+id/button_terms_condition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/padding_button"
         android:layout_marginStart="@dimen/padding_button"
         android:layout_marginTop="@dimen/padding_button"
-        app:cpb_selectorIdle="@drawable/circular_progress_button_bkg_selector"
-        app:cpb_textIdle="@string/terms_and_condition_button"
+        android:background="@drawable/circular_button_shape"
+        android:text="@string/terms_and_condition_button_idle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/check_box_terms_condition" />
+        app:layout_constraintTop_toBottomOf="@+id/check_box_terms_condition"
+        app:spinning_bar_color="#FFF"
+        app:spinning_bar_padding="@dimen/padding_button"
+        app:spinning_bar_width="@dimen/padding_button" />
 
 
 </android.support.constraint.ConstraintLayout>

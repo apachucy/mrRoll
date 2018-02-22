@@ -36,7 +36,7 @@ public class RegisterViewModel extends BaseViewModel {
         this.requestObserver = new Observer<CreateUserResponseWithCode>() {
             @Override
             public void onChanged(@Nullable CreateUserResponseWithCode createUserResponseWithCode) {
-                if (createUserResponseWithCode.getCreateUserResponse() != null && createUserResponseWithCode.getStatusCode() == 200) {
+                if (createUserResponseWithCode.getCreateUserResponse() != null && createUserResponseWithCode.getStatusCode() == 201) {
                     onRegistrationSuccess(createUserResponseWithCode.getCreateUserResponse());
                     return;
                 }
@@ -68,9 +68,13 @@ public class RegisterViewModel extends BaseViewModel {
 
     public void onSaveButtonPressed() {
         String token = configurationManager.getCloudToken();
-        CreateUserRequest user = new CreateUserRequest(platformName, token);
+        CreateUserRequest user = new CreateUserRequest(platformName, "123fsfsgdr24325");
         requestLiveData = accountRepository.createUser(user);
-        requestLiveData.observeForever(requestObserver);
+
+        if (!requestLiveData.hasActiveObservers()) {
+            requestLiveData.observeForever(requestObserver);
+        }
+
     }
 
     private void onRegistrationSuccess(CreateUserResponse createUserResponse) {
@@ -90,6 +94,8 @@ public class RegisterViewModel extends BaseViewModel {
     @Override
     protected void onCleared() {
         super.onCleared();
-        requestLiveData.removeObserver(requestObserver);
+        if (requestLiveData.hasObservers()) {
+            requestLiveData.removeObserver(requestObserver);
+        }
     }
 }

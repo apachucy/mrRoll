@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import javax.inject.Inject;
 
+import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
@@ -18,11 +19,9 @@ import notificator.company.business.unii.mrroll.viewmodel.RegisterViewModel;
 import notificator.company.business.unii.mrroll.viewmodel.factory.RegisterViewModelFactory;
 
 public class RegisterActivity extends AppCompatActivity {
-    private static final int PROGRESS_BUTTON_STATE_IDLE = 0;
-    private static final int PROGRESS_BUTTON_STATE_LOADING = 50;
 
     @BindView(R.id.button_terms_condition)
-    com.dd.CircularProgressButton acceptTermsAndConditionButton;
+    CircularProgressButton acceptTermsAndConditionButton;
 
     @Inject
     RegisterViewModelFactory viewModelFactory;
@@ -31,8 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     private final Observer<Boolean> requestStatusObserver = new Observer<Boolean>() {
         @Override
         public void onChanged(@Nullable Boolean aBoolean) {
-            acceptTermsAndConditionButton.setIndeterminateProgressMode(false);
-            acceptTermsAndConditionButton.setProgress(PROGRESS_BUTTON_STATE_IDLE);
+            acceptTermsAndConditionButton.revertAnimation();
             if (aBoolean) {
                 //success
                 viewModel.openNextActivity(RegisterActivity.this);
@@ -57,8 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     @OnClick(R.id.button_terms_condition)
     public void onAcceptTermsAndConditionButtonClicked() {
-        acceptTermsAndConditionButton.setIndeterminateProgressMode(true);
-        acceptTermsAndConditionButton.setProgress(PROGRESS_BUTTON_STATE_LOADING);
+        acceptTermsAndConditionButton.startAnimation();
         viewModel.onSaveButtonPressed();
     }
 
@@ -73,5 +70,11 @@ public class RegisterActivity extends AppCompatActivity {
 
         viewModel.getActiveCheckBox().observe(this, checkBoxStatusObserver);
         viewModel.getRequestStatus().observe(this, requestStatusObserver);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        acceptTermsAndConditionButton.dispose();
     }
 }

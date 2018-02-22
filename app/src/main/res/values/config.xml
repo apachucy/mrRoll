@@ -1,5 +1,5 @@
 <resources>
-    <string name="base_url">http://polls.apiblueprint.org/</string>
-    <string name="api_version">v1.0/</string>
+    <string name="base_url">http://private-d08318-panbulka.apiary-mock.com/</string>
+    <string name="api_version">V1.0/</string>
     <string name="platform">Android</string>
 </resources>
