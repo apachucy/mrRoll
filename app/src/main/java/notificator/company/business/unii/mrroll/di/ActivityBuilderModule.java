@@ -7,7 +7,7 @@ import notificator.company.business.unii.mrroll.RegisterActivity;
 import notificator.company.business.unii.mrroll.SplashScreenActivity;
 
 @Module
-public abstract class BuilderModule {
+public abstract class ActivityBuilderModule {
     @ContributesAndroidInjector(modules = SplashScreenModule.class)
     abstract SplashScreenActivity bindSplashScreenActivity();
 

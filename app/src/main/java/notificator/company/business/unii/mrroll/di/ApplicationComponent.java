@@ -1,18 +1,14 @@
 package notificator.company.business.unii.mrroll.di;
 
 
-import android.content.Context;
-
 import javax.inject.Singleton;
 
 import dagger.BindsInstance;
 import dagger.Component;
 import dagger.android.support.AndroidSupportInjectionModule;
 import notificator.company.business.unii.mrroll.MrRollApplication;
-import notificator.company.business.unii.mrroll.persistance.ConfigurationManager;
-import notificator.company.business.unii.mrroll.service.TokenInstanceService;
 
-@Component(modules = {AndroidSupportInjectionModule.class, ApplicationModule.class, BuilderModule.class, NetworkModule.class})
+@Component(modules = {AndroidSupportInjectionModule.class, ApplicationModule.class, ActivityBuilderModule.class, ServiceBuilderModule.class, NetworkModule.class})
 @Singleton
 public interface ApplicationComponent {
 
@@ -26,7 +22,7 @@ public interface ApplicationComponent {
 
     //   Context provideContext();
 
-//    ConfigurationManager provideConfigurationManager();
+    //ConfigurationManager provideConfigurationManager();
 
     //   void inject(TokenInstanceService tokenInstanceService);
 

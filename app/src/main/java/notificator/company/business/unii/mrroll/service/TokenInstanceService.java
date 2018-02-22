@@ -17,16 +17,18 @@ public class TokenInstanceService extends FirebaseInstanceIdService {
     @Inject
     ConfigurationManager configurationManager;
 
-    public TokenInstanceService() {
+    @Override
+    public void onCreate() {
         AndroidInjection.inject(this);
-
+        super.onCreate();
     }
-
 
     @Override
     public void onTokenRefresh() {
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+
         String previousToken = configurationManager.getCloudToken();
+        Log.v(TAG, "Previous token: " + previousToken);
 
         Log.v(TAG, "Obtained refreshed Token: " + refreshedToken);
         configurationManager.setCloudToken(refreshedToken);
