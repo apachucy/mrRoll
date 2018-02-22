@@ -15,8 +15,7 @@ import notificator.company.business.unii.mrroll.R;
 import notificator.company.business.unii.mrroll.service.datasource.AccountApi;
 import notificator.company.business.unii.mrroll.service.datasource.CategoryApi;
 import notificator.company.business.unii.mrroll.service.datasource.ControlApi;
-import notificator.company.business.unii.mrroll.service.repository.AccountRepository;
-import notificator.company.business.unii.mrroll.service.repository.AccountRepositoryImpl;
+import notificator.company.business.unii.mrroll.util.LiveDataCallAdapterFactory;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -46,6 +45,7 @@ public class NetworkModule {
         return new Retrofit.Builder().baseUrl(applicationContext.getString(R.string.base_url) + applicationContext.getString(R.string.api_version))
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(httpClient)
+                .addCallAdapterFactory(new LiveDataCallAdapterFactory())
                 .build();
     }
 
@@ -68,9 +68,4 @@ public class NetworkModule {
         return retrofit.create(ControlApi.class);
     }
 
-    @Provides
-    @Singleton
-    AccountRepository provideAccountRepository(AccountApi accountApi) {
-        return new AccountRepositoryImpl(accountApi);
-    }
 }

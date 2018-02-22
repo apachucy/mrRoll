@@ -10,19 +10,18 @@ import org.junit.Test;
 import org.junit.rules.TestRule;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import notificator.company.business.unii.mrroll.persistance.ConfigurationManager;
+import notificator.company.business.unii.mrroll.service.datasource.AccountApi;
 import notificator.company.business.unii.mrroll.service.model.CreateUserRequest;
-import notificator.company.business.unii.mrroll.service.model.CreateUserResponseWithCode;
-import notificator.company.business.unii.mrroll.service.repository.AccountRepository;
+import notificator.company.business.unii.mrroll.service.model.CreateUserResponse;
+import notificator.company.business.unii.mrroll.util.ApiResponse;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -37,7 +36,7 @@ public class RegisterViewModelUnitTest {
     @Mock
     Context context;
     @Mock
-    AccountRepository accountRepository;
+    AccountApi accountApi;
     @Mock
     Observer<Boolean> observer;
 
@@ -47,7 +46,7 @@ public class RegisterViewModelUnitTest {
     public void testCheckboxSelected() {
         //given
         when(configurationManager.isRequestPermissionGranted()).thenReturn(false);
-        objectUnderTest = new RegisterViewModel(context, configurationManager, accountRepository);
+        objectUnderTest = new RegisterViewModel(context, configurationManager, accountApi);
         objectUnderTest.getActiveCheckBox().observeForever(observer);
         //when
         objectUnderTest.changeCheckboxState(true);
@@ -63,7 +62,7 @@ public class RegisterViewModelUnitTest {
     public void testCheckboxUnselected() {
         //given
         when(configurationManager.isRequestPermissionGranted()).thenReturn(true);
-        objectUnderTest = new RegisterViewModel(context, configurationManager, accountRepository);
+        objectUnderTest = new RegisterViewModel(context, configurationManager, accountApi);
         objectUnderTest.getActiveCheckBox().observeForever(observer);
         //when
         objectUnderTest.changeCheckboxState(false);
@@ -82,15 +81,15 @@ public class RegisterViewModelUnitTest {
         when(configurationManager.getCloudToken()).thenReturn("testToken");
         when(context.getString(any(Integer.class))).thenReturn("Android");
 
-        when(accountRepository.createUser(any(CreateUserRequest.class))).thenReturn(new MutableLiveData<CreateUserResponseWithCode>());
-        objectUnderTest = new RegisterViewModel(context, configurationManager, accountRepository);
+        when(accountApi.createUser(any(CreateUserRequest.class))).thenReturn(new MutableLiveData<ApiResponse<CreateUserResponse>>());
+        objectUnderTest = new RegisterViewModel(context, configurationManager, accountApi);
         //when
         objectUnderTest.onSaveButtonPressed();
         ArgumentCaptor<CreateUserRequest> argument = ArgumentCaptor.forClass(CreateUserRequest.class);
         //then
         verify(configurationManager).getCloudToken();
 
-        verify(accountRepository).createUser(argument.capture());
+        verify(accountApi).createUser(argument.capture());
         assertEquals("Android", argument.getValue().getPlatformName());
         assertEquals("testToken", argument.getValue().getPlatformToken());
     }
