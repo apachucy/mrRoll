@@ -33,6 +33,7 @@ public class CheckBoxMasterItem<Parent extends IItem & IExpandable, SubItem exte
 
     private OnClickListener<CheckBoxMasterItem> onClickListener;
 
+
     public CheckBoxMasterItem(String categoryName, String notificationNumber, int categoryId) {
         this.categoryId = categoryId;
         this.categoryName = new StringHolder(categoryName);
@@ -49,7 +50,7 @@ public class CheckBoxMasterItem<Parent extends IItem & IExpandable, SubItem exte
         StringHolder.applyTo(categoryName, viewHolder.name);
         StringHolder.applyTo(notificationNumber, viewHolder.notificationNumber);
 
-        if (getSubItems() == null || getSubItems().size() == 0) {
+        if (!hasSubItems()) {
             viewHolder.icon.setVisibility(View.GONE);
         } else {
             viewHolder.icon.setVisibility(View.VISIBLE);
@@ -62,6 +63,10 @@ public class CheckBoxMasterItem<Parent extends IItem & IExpandable, SubItem exte
             viewHolder.icon.setRotation(180);
             // ViewCompat.setRotation(viewHolder.icon, 180);
         }
+    }
+
+    private boolean hasSubItems() {
+        return !(getSubItems() == null || getSubItems().size() == 0);
     }
 
     @Override
@@ -145,7 +150,7 @@ public class CheckBoxMasterItem<Parent extends IItem & IExpandable, SubItem exte
         return categoryId;
     }
 
-    public static class CheckBoxMasterClickEvent extends ClickEventHook<CheckBoxMasterItem> {
+    public static class CheckBoxMasterClickEvent extends ClickEventHook<IItem> {
         @Override
         public View onBind(@NonNull RecyclerView.ViewHolder viewHolder) {
             if (viewHolder instanceof CheckBoxMasterItem.ViewHolder) {
@@ -155,8 +160,17 @@ public class CheckBoxMasterItem<Parent extends IItem & IExpandable, SubItem exte
         }
 
         @Override
-        public void onClick(View v, int position, FastAdapter<CheckBoxMasterItem> fastAdapter, CheckBoxMasterItem item) {
+        public void onClick(View v, int position, FastAdapter<IItem> fastAdapter, IItem item) {
             fastAdapter.toggleSelection(position);
+            CheckBoxMasterItem checkBoxMasterItem = (CheckBoxMasterItem) fastAdapter.getItem(position);
+
+            if (checkBoxMasterItem.isSelected()) {
+                List<CheckBoxSubItem> subItemList = checkBoxMasterItem.getSubItems();
+                for (CheckBoxSubItem subItem : subItemList) {
+                    subItem.withSetSelected(checkBoxMasterItem.isSelected());
+                }
+                fastAdapter.notifyDataSetChanged();
+            }
         }
     }
 

@@ -9,7 +9,7 @@ public class AdapterSubItemConverter implements SubConverter<IItem, Topic> {
     @Override
     public IItem convertSub(Topic object, int masterId) {
         IItem item = new CheckBoxSubItem(object.getName(), object.getId(), masterId);
-        item.withIdentifier(object.getId());
+        item.withIdentifier(masterId + object.getId());//TODO: rethink this magic number
         return item;
     }
 }

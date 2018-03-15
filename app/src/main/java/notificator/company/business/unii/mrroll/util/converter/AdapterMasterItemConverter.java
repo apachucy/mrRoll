@@ -21,7 +21,7 @@ public class AdapterMasterItemConverter implements MasterConverter<CheckBoxMaste
     public CheckBoxMasterItem convert(Category object) {
         String notificationNumber = "(" + object.getTopicList().size() + ")";
         CheckBoxMasterItem item = new CheckBoxMasterItem<>(object.getName(), notificationNumber, object.getId());
-        item.withIdentifier(object.getId());
+        item.withIdentifier(100 * object.getId()); //TODO: rethink this magic number
         List<IItem> subItemList = new LinkedList<>();
         for (Topic topic : object.getTopicList()) {
             IItem subItem = (IItem) subConverter.convertSub(topic, object.getId());

@@ -19,6 +19,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
+import notificator.company.business.unii.mrroll.adapter.item.CheckBoxMasterItem;
 import notificator.company.business.unii.mrroll.viewmodel.CategorySubscriberViewModel;
 import notificator.company.business.unii.mrroll.viewmodel.factory.CategorySubscriberViewModelFactory;
 
@@ -51,6 +52,8 @@ public class CategorySubscriberActivity extends AppCompatActivity {
         this.fastItemAdapter.withMultiSelect(true);
         this.fastItemAdapter.withUseIdDistributor(false);
         this.fastItemAdapter.addExtension(expandableExtension);
+        this.fastItemAdapter.withEventHook(new CheckBoxMasterItem.CheckBoxMasterClickEvent());
+
         this.notificationList.setLayoutManager(new LinearLayoutManager(this));
         this.notificationList.setAdapter(fastItemAdapter);
 

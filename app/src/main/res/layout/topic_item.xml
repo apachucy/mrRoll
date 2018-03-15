@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_centerVertical="true"
-    android:layout_marginEnd="@dimen/item_margin_small"
-    android:layout_marginStart="@dimen/item_margin_normal"
+
     android:background="@color/colorPrimary"
     android:lines="1"
     android:textAlignment="viewStart"
