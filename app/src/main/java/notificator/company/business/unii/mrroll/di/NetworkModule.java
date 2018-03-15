@@ -15,7 +15,7 @@ import notificator.company.business.unii.mrroll.R;
 import notificator.company.business.unii.mrroll.service.datasource.AccountApi;
 import notificator.company.business.unii.mrroll.service.datasource.CategoryApi;
 import notificator.company.business.unii.mrroll.service.datasource.ControlApi;
-import notificator.company.business.unii.mrroll.util.LiveDataCallAdapterFactory;
+import notificator.company.business.unii.mrroll.util.call.LiveDataCallAdapterFactory;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;

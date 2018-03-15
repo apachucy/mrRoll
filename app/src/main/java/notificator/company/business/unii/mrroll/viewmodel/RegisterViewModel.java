@@ -13,9 +13,9 @@ import notificator.company.business.unii.mrroll.NotificationCenterActivity;
 import notificator.company.business.unii.mrroll.R;
 import notificator.company.business.unii.mrroll.persistance.ConfigurationManager;
 import notificator.company.business.unii.mrroll.service.datasource.AccountApi;
-import notificator.company.business.unii.mrroll.service.model.CreateUserRequest;
-import notificator.company.business.unii.mrroll.service.model.CreateUserResponse;
-import notificator.company.business.unii.mrroll.util.ApiResponse;
+import notificator.company.business.unii.mrroll.service.model.RegisterRequest;
+import notificator.company.business.unii.mrroll.service.model.RegisterResponse;
+import notificator.company.business.unii.mrroll.util.call.ApiResponse;
 
 public class RegisterViewModel extends BaseViewModel {
 
@@ -23,8 +23,8 @@ public class RegisterViewModel extends BaseViewModel {
     private AccountApi accountApi;
     private MutableLiveData<Boolean> activeCheckBox;
     private String platformName;
-    private Observer<ApiResponse<CreateUserResponse>> requestObserver;
-    private LiveData<ApiResponse<CreateUserResponse>> requestLiveData;
+    private Observer<ApiResponse<RegisterResponse>> requestObserver;
+    private LiveData<ApiResponse<RegisterResponse>> requestLiveData;
     private MutableLiveData<Boolean> serverRequestStatusAccepted;
 
     public RegisterViewModel(final Context context, final ConfigurationManager configurationManager, final AccountApi accountApi) {
@@ -34,9 +34,9 @@ public class RegisterViewModel extends BaseViewModel {
         this.platformName = context.getString(R.string.platform);
         this.activeCheckBox.setValue(configurationManager.isRequestPermissionGranted());
         this.serverRequestStatusAccepted = new MutableLiveData<>();
-        this.requestObserver = new Observer<ApiResponse<CreateUserResponse>>() {
+        this.requestObserver = new Observer<ApiResponse<RegisterResponse>>() {
             @Override
-            public void onChanged(@Nullable ApiResponse<CreateUserResponse> createUserResponseWithCode) {
+            public void onChanged(@Nullable ApiResponse<RegisterResponse> createUserResponseWithCode) {
                 if (createUserResponseWithCode.body != null && createUserResponseWithCode.isSuccessful()) {
                     onRegistrationSuccess(createUserResponseWithCode.body);
                     return;
@@ -69,7 +69,7 @@ public class RegisterViewModel extends BaseViewModel {
 
     public void onSaveButtonPressed() {
         String token = configurationManager.getCloudToken();
-        CreateUserRequest user = new CreateUserRequest(platformName, token);
+        RegisterRequest user = new RegisterRequest(platformName, token);
         requestLiveData = accountApi.createUser(user);
 
         if (!requestLiveData.hasActiveObservers()) {
@@ -78,9 +78,9 @@ public class RegisterViewModel extends BaseViewModel {
 
     }
 
-    private void onRegistrationSuccess(CreateUserResponse createUserResponse) {
+    private void onRegistrationSuccess(RegisterResponse registerResponse) {
         configurationManager.setRequestPermissionGranted(true);
-        configurationManager.setUserId(createUserResponse.getId());
+        configurationManager.setUserId(registerResponse.getId());
         serverRequestStatusAccepted.setValue(true);
     }
 

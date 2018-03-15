@@ -3,13 +3,13 @@ package notificator.company.business.unii.mrroll.service.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class CreateUserRequest {
-    @SerializedName("Platform Name")
+public class RegisterRequest {
+    @SerializedName("os")
     private final String platformName;
-    @SerializedName("Token")
+    @SerializedName("token")
     private final String platformToken;
 
-    public CreateUserRequest(String platformName, String platformToken) {
+    public RegisterRequest(String platformName, String platformToken) {
         this.platformName = platformName;
         this.platformToken = platformToken;
     }

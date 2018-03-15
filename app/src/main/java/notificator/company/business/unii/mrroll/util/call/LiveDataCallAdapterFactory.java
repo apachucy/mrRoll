@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package notificator.company.business.unii.mrroll.util;
+package notificator.company.business.unii.mrroll.util.call;
 
 import android.arch.lifecycle.LiveData;
 

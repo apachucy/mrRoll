@@ -6,8 +6,7 @@ import android.arch.lifecycle.LiveData;
 import java.util.List;
 
 import notificator.company.business.unii.mrroll.service.model.Category;
-import notificator.company.business.unii.mrroll.util.ApiResponse;
-import retrofit2.Call;
+import notificator.company.business.unii.mrroll.util.call.ApiResponse;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;

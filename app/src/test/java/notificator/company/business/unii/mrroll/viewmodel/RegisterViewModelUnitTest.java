@@ -15,9 +15,9 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import notificator.company.business.unii.mrroll.persistance.ConfigurationManager;
 import notificator.company.business.unii.mrroll.service.datasource.AccountApi;
-import notificator.company.business.unii.mrroll.service.model.CreateUserRequest;
-import notificator.company.business.unii.mrroll.service.model.CreateUserResponse;
-import notificator.company.business.unii.mrroll.util.ApiResponse;
+import notificator.company.business.unii.mrroll.service.model.RegisterRequest;
+import notificator.company.business.unii.mrroll.service.model.RegisterResponse;
+import notificator.company.business.unii.mrroll.util.call.ApiResponse;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
@@ -81,11 +81,11 @@ public class RegisterViewModelUnitTest {
         when(configurationManager.getCloudToken()).thenReturn("testToken");
         when(context.getString(any(Integer.class))).thenReturn("Android");
 
-        when(accountApi.createUser(any(CreateUserRequest.class))).thenReturn(new MutableLiveData<ApiResponse<CreateUserResponse>>());
+        when(accountApi.createUser(any(RegisterRequest.class))).thenReturn(new MutableLiveData<ApiResponse<RegisterResponse>>());
         objectUnderTest = new RegisterViewModel(context, configurationManager, accountApi);
         //when
         objectUnderTest.onSaveButtonPressed();
-        ArgumentCaptor<CreateUserRequest> argument = ArgumentCaptor.forClass(CreateUserRequest.class);
+        ArgumentCaptor<RegisterRequest> argument = ArgumentCaptor.forClass(RegisterRequest.class);
         //then
         verify(configurationManager).getCloudToken();
 
