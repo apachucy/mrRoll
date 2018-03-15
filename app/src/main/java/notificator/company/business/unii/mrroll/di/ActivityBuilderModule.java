@@ -3,6 +3,7 @@ package notificator.company.business.unii.mrroll.di;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
+import notificator.company.business.unii.mrroll.CategorySubscriberActivity;
 import notificator.company.business.unii.mrroll.RegisterActivity;
 import notificator.company.business.unii.mrroll.SplashScreenActivity;
 
@@ -13,4 +14,7 @@ public abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector(modules = RegisterViewModule.class)
     abstract RegisterActivity bindRegisterActivity();
+
+    @ContributesAndroidInjector(modules = CategorySubscriberModule.class)
+    abstract CategorySubscriberActivity bindCategorySubscriberActivity();
 }

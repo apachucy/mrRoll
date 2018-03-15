@@ -7,8 +7,9 @@ import dagger.BindsInstance;
 import dagger.Component;
 import dagger.android.support.AndroidSupportInjectionModule;
 import notificator.company.business.unii.mrroll.MrRollApplication;
+import notificator.company.business.unii.mrroll.viewmodel.CategorySubscriberViewModel;
 
-@Component(modules = {AndroidSupportInjectionModule.class, ApplicationModule.class, ActivityBuilderModule.class, ServiceBuilderModule.class, NetworkModule.class})
+@Component(modules = {AndroidSupportInjectionModule.class, ApplicationModule.class, ActivityBuilderModule.class, ServiceBuilderModule.class, NetworkModule.class, CategorySubscriberModule.class})
 @Singleton
 public interface ApplicationComponent {
 

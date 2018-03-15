@@ -10,6 +10,10 @@ import notificator.company.business.unii.mrroll.MrRollApplication;
 import notificator.company.business.unii.mrroll.persistance.ConfigurationManager;
 import notificator.company.business.unii.mrroll.persistance.ConfigurationService;
 import notificator.company.business.unii.mrroll.persistance.LocalConfigurationManager;
+import notificator.company.business.unii.mrroll.util.converter.AdapterMasterItemConverter;
+import notificator.company.business.unii.mrroll.util.converter.AdapterSubItemConverter;
+import notificator.company.business.unii.mrroll.util.converter.MasterConverter;
+import notificator.company.business.unii.mrroll.util.converter.SubConverter;
 
 @Module
 public class ApplicationModule implements IApplicationModule {
@@ -33,5 +37,19 @@ public class ApplicationModule implements IApplicationModule {
     @Override
     public ConfigurationManager provideConfigurationManager(Context context) {
         return new LocalConfigurationManager(new ConfigurationService(context, CONFIG_FILE));
+    }
+
+    @Provides
+    @Singleton
+    @Override
+    public MasterConverter provideMasterConverter(SubConverter converter) {
+        return new AdapterMasterItemConverter(converter);
+    }
+
+    @Provides
+    @Singleton
+    @Override
+    public SubConverter provideSubConverter() {
+        return new AdapterSubItemConverter();
     }
 }

@@ -5,6 +5,7 @@ import android.arch.lifecycle.LiveData;
 
 import java.util.List;
 
+import notificator.company.business.unii.mrroll.service.model.Categories;
 import notificator.company.business.unii.mrroll.service.model.Category;
 import notificator.company.business.unii.mrroll.util.call.ApiResponse;
 import retrofit2.http.Body;
@@ -14,8 +15,8 @@ import retrofit2.http.Path;
 
 public interface CategoryApi {
 
-    @GET("categories/all")
-    LiveData<ApiResponse<List<Category>>> getAllCategories();
+    @GET("categories")
+    LiveData<ApiResponse<Categories>> getAllCategories();
 
     @GET("categories/{user_id}")
     LiveData<ApiResponse<List<Category>>> getCategories(@Path("user_id") int id);
