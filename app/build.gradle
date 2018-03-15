@@ -34,12 +34,14 @@ project.ext {
     daggerVersion = "2.13"
     retrofitVersion = "2.3.0"
     butterknifeVersion = "8.8.1"
+    fastAdapterVersion = "3.2.4"
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "com.android.support:appcompat-v7:$project.supportLibraryVersion"
     implementation "com.android.support:design:$project.supportLibraryVersion"
+    implementation "com.android.support:recyclerview-v7:$project.supportLibraryVersion"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.google.firebase:firebase-messaging:11.0.4'
 
@@ -77,6 +79,13 @@ dependencies {
 
     //progress button library
     compile 'br.com.simplepass:loading-button-android:1.12.1'
+
+    implementation "com.mikepenz:fastadapter:$project.fastAdapterVersion@aar"
+    implementation "com.mikepenz:fastadapter-extensions-expandable:$project.fastAdapterVersion@aar"
+    implementation "com.mikepenz:fastadapter-commons:$project.fastAdapterVersion@aar"
+
+//The tiny Materialize library used for its useful helper classes
+    implementation "com.mikepenz:materialize:1.1.2@aar"
 }
 
 apply plugin: 'com.google.gms.google-services'

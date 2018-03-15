@@ -4,4 +4,6 @@
     <string name="terms_and_condition_check_box">I agree</string>
     <string name="terms_and_condition_button">Start</string>
     <string name="network_error">Network Error, try later</string>
+    <string name="category_section_description_icon">Icon opens subcategory for topics</string>
+
 </resources>
